@@ -11,7 +11,24 @@ const CustomSlider = withStyles(styles)(SliderMui);
 const useStyles = makeStyles(additionalStyles);
 
 const Slider = ({ title }) => {
+  const [value, setValue] = React.useState(100);
   const classes = useStyles();
+
+  const handleSliderChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  const handleInputChange = (event) => {
+    setValue(event.target.value === '' ? '' : Number(event.target.value));
+  };
+
+  const handleBlur = () => {
+    if (value < 0) {
+      setValue(0);
+    } else if (value > 255) {
+      setValue(255);
+    }
+  };
 
   return (
     <>
@@ -20,12 +37,18 @@ const Slider = ({ title }) => {
           placeholder="0"
           inputProps={{ 'aria-label': 'link field' }}
           className={classes.input}
+          value={value}
+          onChange={handleInputChange}
+          onBlur={handleBlur}
         />
         <div style={{ height: 85 }}>
           <CustomSlider
+            value={typeof value === 'number' ? value : 0}
+            onChange={handleSliderChange}
             valueLabelDisplay="auto"
             orientation="vertical"
-            defaultValue={20}
+            defaultValue={100}
+            max={255}
             aria-labelledby="vertical-slider"
           />
         </div>

@@ -51,6 +51,7 @@ export const additionalStyles = () => ({
     boxShadow: 'inset 3px 3px 6px #CCCCCC, inset -3px -3px 6px #FFFFFF',
     borderRadius: 4,
     fontSize: 14,
+    color: colors.primary,
     marginBottom: 10,
     '&::placeholder': {
       color: colors['gray-3'],
