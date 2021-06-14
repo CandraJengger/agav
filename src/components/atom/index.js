@@ -1,5 +1,5 @@
 import Button from './Button';
 import Gap from './Gap';
-import Navbar from './Navbar';
+import MainContainer from './MainContainer';
 
-export { Button, Gap, Navbar };
+export { Button, Gap, MainContainer };

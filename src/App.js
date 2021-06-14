@@ -1,16 +1,15 @@
 import React from 'react';
 import './App.css';
-import { Button, Gap, Navbar } from './components';
+import { Button, Gap, AppLayout } from './components';
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
+    <AppLayout>
       <h1>Halo Dunia</h1>
       <Button text="Generate" />
       <Gap width="2px" height="50px" />
       <Button disabled text="Disabled" />
-    </div>
+    </AppLayout>
   );
 }
 
