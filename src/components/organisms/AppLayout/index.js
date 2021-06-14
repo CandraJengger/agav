@@ -11,7 +11,7 @@ const AppLayout = ({ children }) => {
       <Hidden mdUp>
         <Navbar />
       </Hidden>
-      <Grid container spacing="3">
+      <Grid container>
         <Grid item md={4}>
           <Hidden smDown>
             <Sidebar />
