@@ -9,6 +9,7 @@ const styles = (theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.secondary,
+    boxShadow: '0px 4px 7px rgba(0, 0, 0, 0.11);',
   },
   title: {
     color: colors.primary,
