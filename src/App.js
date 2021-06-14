@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Button, Gap, AppLayout, GenerateComponent } from './components';
+import { Gap, AppLayout, GenerateComponent, Slider } from './components';
 
 function App() {
   return (
@@ -9,7 +9,9 @@ function App() {
       <GenerateComponent />
       <Gap height="44px" width="10px" />
       <Gap width="2px" height="50px" />
-      <Button disabled text="Disabled" />
+      <Slider title="min duration" />
+      <Slider title="min duration" />
+      <Slider title="min duration" />
     </AppLayout>
   );
 }
