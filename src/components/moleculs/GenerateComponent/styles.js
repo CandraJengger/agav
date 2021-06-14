@@ -15,6 +15,15 @@ const styles = () => ({
     color: colors['gray-4'],
     marginRight: 9,
   },
+  boxSlider: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    paddingLeft: 7,
+    paddingRight: 7,
+    boxSizing: 'border-box',
+  },
 });
 
 export const accordionStyles = () => ({

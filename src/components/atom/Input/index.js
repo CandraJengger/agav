@@ -5,7 +5,7 @@ import styles from './styles';
 
 const useStyles = makeStyles(styles);
 
-const Input = () => {
+const Input = ({ onChange }) => {
   const classes = useStyles();
 
   return (
@@ -13,6 +13,9 @@ const Input = () => {
       placeholder="Input Link"
       inputProps={{ 'aria-label': 'link field' }}
       className={classes.root}
+      onChange={(event) =>
+        onChange({ name: 'link', value: event.target.value })
+      }
     />
   );
 };

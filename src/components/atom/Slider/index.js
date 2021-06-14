@@ -10,16 +10,21 @@ const CustomSlider = withStyles(styles)(SliderMui);
 
 const useStyles = makeStyles(additionalStyles);
 
-const Slider = ({ title }) => {
+const Slider = ({ title, onChange }) => {
   const [value, setValue] = React.useState(100);
   const classes = useStyles();
 
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
+    onChange({ name: title.replace(' ', '-'), value: newValue });
   };
 
   const handleInputChange = (event) => {
     setValue(event.target.value === '' ? '' : Number(event.target.value));
+    onChange({
+      name: title.replace(' ', '-'),
+      value: event.target.value === '' ? '' : Number(event.target.value),
+    });
   };
 
   const handleBlur = () => {

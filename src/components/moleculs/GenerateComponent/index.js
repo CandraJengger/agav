@@ -29,7 +29,7 @@ const AccordionDetails = withStyles(accordionDetailsStyles)(
 
 const useStyles = makeStyles(styles);
 
-const GenerateComponent = () => {
+const GenerateComponent = ({ form, onChange, onSubmit }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -47,7 +47,7 @@ const GenerateComponent = () => {
 
   return (
     <Box component="section" textAlign="center" className={classes.root}>
-      <Input />
+      <Input onChange={onChange} />
       <Accordion
         square
         expanded={expanded === 'parameterPanel'}
@@ -64,30 +64,20 @@ const GenerateComponent = () => {
           />
         </AccordionSummary>
         <AccordionDetails>
-          <div
-            style={{
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
-              paddingLeft: 7,
-              paddingRight: 7,
-              boxSizing: 'border-box',
-            }}
-          >
-            <Slider title="sample rate" />
-            <Slider title="min duration" />
-            <Slider title="max duration" />
-            <Slider title="frames" />
-            <Slider title="threshold" />
-          </div>
+          <Box className={classes.boxSlider}>
+            <Slider title="sample rate" onChange={onChange} />
+            <Slider title="min duration" onChange={onChange} />
+            <Slider title="max duration" onChange={onChange} />
+            <Slider title="frames" onChange={onChange} />
+            <Slider title="threshold" onChange={onChange} />
+          </Box>
         </AccordionDetails>
       </Accordion>
       <Gap
         height={expanded === 'parameterPanel' ? '66px' : '12px'}
         width="10px"
       />
-      <Button text="Generate" />
+      <Button text="Generate" onClick={onSubmit} />
     </Box>
   );
 };
