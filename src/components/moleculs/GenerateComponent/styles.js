@@ -11,7 +11,7 @@ const styles = () => ({
   },
   title: {
     fontFamily: fonts.nunito,
-    fontSize: 12,
+    fontSize: 14,
     color: colors['gray-4'],
     marginRight: 9,
   },
@@ -44,6 +44,8 @@ export const accordionStyles = () => ({
 
 export const accordionSummaryStyles = () => ({
   root: {
+    display: 'flex',
+    alignItems: 'flex-start',
     backgroundColor: colors['gray-1'],
     border: 0,
     padding: '0 5px',

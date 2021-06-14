@@ -29,7 +29,7 @@ const AccordionDetails = withStyles(accordionDetailsStyles)(
 
 const useStyles = makeStyles(styles);
 
-const GenerateComponent = ({ form, onChange, onSubmit }) => {
+const GenerateComponent = ({ form, error, onChange, onSubmit }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -47,7 +47,7 @@ const GenerateComponent = ({ form, onChange, onSubmit }) => {
 
   return (
     <Box component="section" textAlign="center" className={classes.root}>
-      <Input onChange={onChange} />
+      <Input onChange={onChange} error={error} />
       <Accordion
         square
         expanded={expanded === 'parameterPanel'}

@@ -11,13 +11,18 @@ const styles = () => ({
     borderRadius: 24,
     boxSizing: 'border-box',
     marginTop: 10,
-    marginBottom: 10,
     '& input': {
       fontFamily: fonts.nunito,
       '&::placeholder': {
         color: colors['gray-3'],
       },
     },
+  },
+  error: {
+    margin: '7px 5px 0 0',
+    textAlign: 'right',
+    fontSize: 12,
+    color: colors.red,
   },
 });
 
