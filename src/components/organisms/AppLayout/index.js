@@ -2,8 +2,7 @@ import React from 'react';
 import Hidden from '@material-ui/core/Hidden';
 import withWidth from '@material-ui/core/withWidth';
 import { MainContainer } from '../../atom';
-import { Navbar, Sidebar } from '../../moleculs';
-import Grid from '@material-ui/core/Grid';
+import { Navbar } from '../../moleculs';
 
 const AppLayout = ({ children }) => {
   return (
@@ -11,16 +10,7 @@ const AppLayout = ({ children }) => {
       <Hidden mdUp>
         <Navbar />
       </Hidden>
-      <Grid container>
-        <Grid item md={4}>
-          <Hidden smDown>
-            <Sidebar />
-          </Hidden>
-        </Grid>
-        <Grid item xs={12} md={8}>
-          <MainContainer>{children}</MainContainer>
-        </Grid>
-      </Grid>
+      <MainContainer>{children}</MainContainer>
     </>
   );
 };
