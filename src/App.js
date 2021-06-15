@@ -9,6 +9,7 @@ import {
   Sidebar,
   AudioList,
 } from './components';
+import audioDummy from './data/audio-dummy';
 
 function App() {
   const [form, setForm] = React.useState({
@@ -20,6 +21,8 @@ function App() {
     threshold: 100,
   });
   const [error, setError] = React.useState(false);
+  const [isPlaying, setIsPlaying] = React.useState(null);
+  const [audioList, setAudioList] = React.useState([]);
 
   const onSubmit = () => {
     if (form.link) {
@@ -27,13 +30,35 @@ function App() {
       return;
     }
 
+    setAudioList(audioDummy);
     setError(true);
+  };
+
+  const onSendVerifiedList = () => {
+    console.log('Verified list :>> ', audioList);
   };
 
   const onChange = ({ name, value }) => {
     setForm({ ...form, [name]: value });
     setError(false);
   };
+
+  const handleAudioPlay = (name) => {
+    setIsPlaying(name);
+  };
+
+  const handleUpdateAudio = (index, value) => {
+    let tempState = [...audioList];
+    let tempElement = { ...audioList[index] };
+    tempElement.isVerified = value;
+    tempState[index] = tempElement;
+    setAudioList(tempState);
+  };
+
+  React.useEffect(() => {
+    console.log(isPlaying);
+    console.log(audioList);
+  }, [isPlaying, audioList]);
 
   return (
     <AppLayout>
@@ -57,7 +82,15 @@ function App() {
             onSubmit={onSubmit}
           />
           <Gap height="44px" width="10px" />
-          <AudioList />
+          {audioList.length > 0 && (
+            <AudioList
+              audioList={audioList}
+              isPlaying={isPlaying}
+              playAudio={handleAudioPlay}
+              onVerification={handleUpdateAudio}
+              onSendVerifiedList={onSendVerifiedList}
+            />
+          )}
         </Grid>
       </Grid>
     </AppLayout>

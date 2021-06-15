@@ -8,7 +8,13 @@ import styles from './styles';
 
 const useStyles = makeStyles(styles);
 
-const AudioList = ({ audioList = [], onClick, onVerification }) => {
+const AudioList = ({
+  isPlaying,
+  playAudio,
+  audioList = [],
+  onVerification,
+  onSendVerifiedList,
+}) => {
   const classes = useStyles();
 
   return (
@@ -16,21 +22,19 @@ const AudioList = ({ audioList = [], onClick, onVerification }) => {
       <Typography className={classes.title}>Audio List</Typography>
       <Box className={classes.listSection}>
         <Gap height="26px" width="10px" />
-        <Button text="Send a verified list" />
+        <Button text="Send a verified list" onClick={onSendVerifiedList} />
         <Gap height="26px" width="10px" />
         <List dense={false}>
-          {audioList.map((audio) => (
+          {audioList.map((audio, index) => (
             <AudioItem
+              key={index}
+              position={index}
               title={audio.title}
-              onClick={onClick}
+              onClick={() => playAudio(audio.title)}
               onVerification={onVerification}
+              playing={isPlaying === audio.title ? true : false}
             />
           ))}
-
-          <AudioItem title="Audio name" />
-          <AudioItem title="Audio name" />
-          <AudioItem title="Audio name" />
-          <AudioItem title="Audio name" />
         </List>
       </Box>
     </Box>

@@ -11,11 +11,20 @@ import colors from '../../../assets/theme/colors';
 
 const useStyles = makeStyles(styles);
 
-const AudioItem = ({ title, playing, isVerified, onClick, onVerification }) => {
+const AudioItem = ({
+  position,
+  title,
+  playing,
+  isVerified,
+  onClick,
+  onVerification,
+}) => {
+  const [audioVerified, setAudioVerified] = React.useState(isVerified);
+
   const classes = useStyles();
 
   const getColor = () => {
-    if (isVerified) {
+    if (audioVerified) {
       return colors.primary;
     }
 
@@ -39,7 +48,10 @@ const AudioItem = ({ title, playing, isVerified, onClick, onVerification }) => {
         <IconButton
           edge="end"
           aria-label="verification"
-          onClick={onVerification}
+          onClick={() => {
+            onVerification(position, !audioVerified);
+            setAudioVerified(!audioVerified);
+          }}
         >
           <CheckCircleOutlineIcon style={{ fontSize: 18, color: getColor() }} />
         </IconButton>
