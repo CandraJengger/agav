@@ -12,6 +12,7 @@ const styles = () => ({
   },
   listSection: {
     textAlign: 'center',
+    marginBottom: 120,
   },
 });
 

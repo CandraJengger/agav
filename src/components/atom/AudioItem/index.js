@@ -13,7 +13,7 @@ const useStyles = makeStyles(styles);
 
 const AudioItem = ({
   position,
-  title,
+  audio,
   playing,
   isVerified,
   onClick,
@@ -35,7 +35,7 @@ const AudioItem = ({
     <ListItem className={classes.wrapper}>
       <ListItemText
         className={classes.title}
-        primary={title}
+        primary={audio.title}
         onClick={onClick}
       />
       <ListItemSecondaryAction className={classes.actionSection}>

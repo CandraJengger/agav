@@ -31,8 +31,8 @@ const AudioList = ({
               <Grid item key={index} xs={12} md={6}>
                 <AudioItem
                   position={index}
-                  title={audio.title}
-                  onClick={() => playAudio(audio.title)}
+                  audio={audio}
+                  onClick={() => playAudio(audio)}
                   onVerification={onVerification}
                   playing={isPlaying === audio.title ? true : false}
                 />

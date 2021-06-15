@@ -8,6 +8,8 @@ import {
   GenerateComponent,
   Sidebar,
   AudioList,
+  AudioPlayer,
+  MiniAudio,
 } from './components';
 import audioDummy from './data/audio-dummy';
 
@@ -23,6 +25,7 @@ function App() {
   const [error, setError] = React.useState(false);
   const [isPlaying, setIsPlaying] = React.useState(null);
   const [audioList, setAudioList] = React.useState([]);
+  const [currentAudio, setCurrentAudio] = React.useState(null);
 
   const onSubmit = () => {
     if (form.link) {
@@ -43,8 +46,9 @@ function App() {
     setError(false);
   };
 
-  const handleAudioPlay = (name) => {
-    setIsPlaying(name);
+  const handleAudioPlay = (audio) => {
+    setIsPlaying(audio.title);
+    setCurrentAudio(audio);
   };
 
   const handleUpdateAudio = (index, value) => {
@@ -52,13 +56,16 @@ function App() {
     let tempElement = { ...audioList[index] };
     tempElement.isVerified = value;
     tempState[index] = tempElement;
+
     setAudioList(tempState);
+    setCurrentAudio(tempElement);
   };
 
   React.useEffect(() => {
     console.log(isPlaying);
     console.log(audioList);
-  }, [isPlaying, audioList]);
+    console.log('current audio', currentAudio);
+  }, [isPlaying, audioList, currentAudio]);
 
   return (
     <AppLayout>
@@ -91,8 +98,16 @@ function App() {
               onSendVerifiedList={onSendVerifiedList}
             />
           )}
+
+          {/* <AudioPlayer /> */}
         </Grid>
       </Grid>
+      {/* Belum onPause */}
+      <MiniAudio
+        audio={currentAudio}
+        playAudio={handleAudioPlay}
+        style={{ position: 'fixed', right: 0, bottom: 0, left: 0 }}
+      />
     </AppLayout>
   );
 }
