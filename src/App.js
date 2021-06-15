@@ -2,7 +2,13 @@ import React from 'react';
 import './App.css';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
-import { Gap, AppLayout, GenerateComponent, Sidebar } from './components';
+import {
+  Gap,
+  AppLayout,
+  GenerateComponent,
+  Sidebar,
+  AudioList,
+} from './components';
 
 function App() {
   const [form, setForm] = React.useState({
@@ -51,7 +57,7 @@ function App() {
             onSubmit={onSubmit}
           />
           <Gap height="44px" width="10px" />
-          <Gap width="2px" height="50px" />
+          <AudioList />
         </Grid>
       </Grid>
     </AppLayout>
