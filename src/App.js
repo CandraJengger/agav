@@ -27,10 +27,10 @@ function App() {
   const onSubmit = () => {
     if (form.link) {
       console.log('ini yang di submit', form);
+      setAudioList(audioDummy);
       return;
     }
 
-    setAudioList(audioDummy);
     setError(true);
   };
 
