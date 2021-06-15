@@ -8,7 +8,7 @@ const styles = () => ({
     boxShadow: '-6px -6px 12px #FFFFFF, 6px 6px 12px #CCCCCC',
     borderRadius: 8,
     padding: '18px 20px',
-    margin: '20px 0',
+
     cursor: 'pointer',
   },
   title: {

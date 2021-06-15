@@ -4,6 +4,7 @@ import { AudioItem, Button, Gap } from '../../atom';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
 import styles from './styles';
 
 const useStyles = makeStyles(styles);
@@ -25,16 +26,19 @@ const AudioList = ({
         <Button text="Send a verified list" onClick={onSendVerifiedList} />
         <Gap height="26px" width="10px" />
         <List dense={false}>
-          {audioList.map((audio, index) => (
-            <AudioItem
-              key={index}
-              position={index}
-              title={audio.title}
-              onClick={() => playAudio(audio.title)}
-              onVerification={onVerification}
-              playing={isPlaying === audio.title ? true : false}
-            />
-          ))}
+          <Grid container spacing={2}>
+            {audioList.map((audio, index) => (
+              <Grid item key={index} xs={12} md={6}>
+                <AudioItem
+                  position={index}
+                  title={audio.title}
+                  onClick={() => playAudio(audio.title)}
+                  onVerification={onVerification}
+                  playing={isPlaying === audio.title ? true : false}
+                />
+              </Grid>
+            ))}
+          </Grid>
         </List>
       </Box>
     </Box>
