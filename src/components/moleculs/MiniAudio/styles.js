@@ -3,6 +3,9 @@ import colors from '../../../assets/theme/colors';
 
 const styles = () => ({
   wrapper: {
+    right: 0,
+    bottom: 0,
+    left: 0,
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',

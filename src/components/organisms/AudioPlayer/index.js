@@ -9,16 +9,17 @@ import colors from '../../../assets/theme/colors';
 
 const useStyles = makeStyles(styles);
 
-const AudioPlayer = () => {
+const AudioPlayer = ({ audio }) => {
   const classes = useStyles();
 
   return (
     <Box className={classes.container}>
       <MiniAudio
+        audio={audio}
         customIcon
         icon={<ExpandLessIcon style={{ color: colors.secondary }} />}
       />
-      <Box className={classes.audioSection}>Isi</Box>
+      <Box className={classes.audioSection}>Isiasdasdasd</Box>
     </Box>
   );
 };

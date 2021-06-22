@@ -100,15 +100,11 @@ function App() {
             />
           )}
 
-          {/* <AudioPlayer /> */}
+          <AudioPlayer audio={currentAudio} />
         </Grid>
       </Grid>
       {/* Belum onPause */}
-      <MiniAudio
-        audio={currentAudio}
-        playAudio={handleAudioPlay}
-        style={{ position: 'fixed', right: 0, bottom: 0, left: 0 }}
-      />
+      {/* <MiniAudio audio={currentAudio} playAudio={handleAudioPlay} fixed /> */}
     </AppLayout>
   );
 }

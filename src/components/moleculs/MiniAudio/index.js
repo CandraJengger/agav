@@ -10,19 +10,39 @@ import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles(styles);
 
-const MiniAudio = ({ audio, play, onClick, customIcon, icon, style }) => {
+const MiniAudio = ({
+  audio,
+  play,
+  onClick,
+  customIcon,
+  icon,
+  style,
+  fixed,
+}) => {
   const classes = useStyles();
 
   React.useEffect(() => {
     console.log('mini audio', audio?.title);
   }, [audio]);
 
+  const getFixed = () => {
+    if (fixed) {
+      return 'fixed';
+    }
+
+    return 'relative';
+  };
+
   return (
-    <Box className={classes.wrapper} style={style}>
+    <Box className={classes.wrapper} style={(style, { position: getFixed() })}>
       <Box>
         <Typography className={classes.title}>{audio?.title}</Typography>
         <Typography className={classes.subTitle}>
-          {audio?.isVerified ? 'Verified' : 'Not Verified'}
+          {audio
+            ? audio?.isVerified
+              ? 'Verified'
+              : 'Not Verified'
+            : 'Not audio selected'}
         </Typography>
       </Box>
 

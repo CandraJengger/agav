@@ -3,7 +3,7 @@ import colors from '../../../assets/theme/colors';
 
 const styles = () => ({
   container: {
-    position: 'absolute',
+    position: 'fixed',
     right: 0,
     bottom: 0,
     left: 0,
