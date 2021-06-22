@@ -34,7 +34,7 @@ const MiniAudio = ({
   };
 
   return (
-    <Box className={classes.wrapper} style={(style, { position: getFixed() })}>
+    <Box className={classes.wrapper} style={{ ...style, position: getFixed() }}>
       <Box>
         <Typography className={classes.title}>{audio?.title}</Typography>
         <Typography className={classes.subTitle}>

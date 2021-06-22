@@ -12,6 +12,10 @@ const styles = () => ({
     padding: '2.6rem 1.75rem',
     backgroundColor: colors.secondary,
   },
+  audioControl: {
+    display: 'flex',
+    justifyContent: 'space-around',
+  },
 });
 
 export default styles;
