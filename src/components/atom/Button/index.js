@@ -1,14 +1,17 @@
 import React from 'react';
 import ButtonMui from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
-const Button = ({ text, ...props }) => {
+const useStyles = makeStyles(styles);
+const Button = ({ text, onClick, ...props }) => {
+  const classes = useStyles();
+
   return (
-    <ButtonMui className={styles.root} {...props}>
+    <ButtonMui className={classes.root} {...props} onClick={onClick}>
       {text}
     </ButtonMui>
   );
 };
 
-export default withStyles(styles)(Button);
+export default Button;
