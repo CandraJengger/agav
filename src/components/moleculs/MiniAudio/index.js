@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -14,16 +14,22 @@ const MiniAudio = ({
   audio,
   play,
   onClick,
+  playAudio,
   customIcon,
   icon,
   style,
   fixed,
 }) => {
   const classes = useStyles();
+  const [isPlaying, setIsPlaying] = useState(false);
 
   React.useEffect(() => {
     console.log('mini audio', audio?.title);
   }, [audio]);
+
+  const togglePlay = () => {
+    setIsPlaying(!isPlaying);
+  };
 
   const getFixed = () => {
     if (fixed) {
@@ -46,10 +52,10 @@ const MiniAudio = ({
         </Typography>
       </Box>
 
-      <IconButton onClick={onClick}>
+      <IconButton onClick={togglePlay}>
         {customIcon ? (
           icon
-        ) : play ? (
+        ) : isPlaying ? (
           <PauseIcon style={{ color: colors.secondary }} />
         ) : (
           <PlayArrowIcon style={{ color: colors.secondary }} />
