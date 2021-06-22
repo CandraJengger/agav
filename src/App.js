@@ -11,6 +11,7 @@ import {
   AudioList,
   AudioPlayer,
   MiniAudio,
+  Loading,
 } from './components';
 import audioDummy from './data/audio-dummy';
 
@@ -27,15 +28,20 @@ function App() {
   const [isPlaying, setIsPlaying] = React.useState(null);
   const [audioList, setAudioList] = React.useState([]);
   const [currentAudio, setCurrentAudio] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
 
   const onSubmit = () => {
-    if (form.link) {
-      console.log('ini yang di submit', form);
-      setAudioList(audioDummy);
-      return;
-    }
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      if (form.link) {
+        console.log('ini yang di submit', form);
+        setAudioList(audioDummy);
+        return;
+      }
 
-    setError(true);
+      setError(true);
+    }, 1500);
   };
 
   const onSendVerifiedList = () => {
@@ -87,9 +93,11 @@ function App() {
             form={form}
             error={error}
             onChange={onChange}
+            audioList={audioList}
             onSubmit={onSubmit}
           />
           <Gap height="44px" width="10px" />
+          {loading && <Loading text="Downloading.." />}
           {audioList.length > 0 && (
             <AudioList
               audioList={audioList}
@@ -104,7 +112,7 @@ function App() {
         </Grid>
       </Grid>
       {/* Belum onPause */}
-      <MiniAudio audio={currentAudio} fixed />
+      {currentAudio && <MiniAudio audio={currentAudio} fixed />}
     </AppLayout>
   );
 }

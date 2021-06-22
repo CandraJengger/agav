@@ -29,7 +29,7 @@ const AccordionDetails = withStyles(accordionDetailsStyles)(
 
 const useStyles = makeStyles(styles);
 
-const GenerateComponent = ({ form, error, onChange, onSubmit }) => {
+const GenerateComponent = ({ form, error, onChange, onSubmit, audioList }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -77,7 +77,11 @@ const GenerateComponent = ({ form, error, onChange, onSubmit }) => {
         height={expanded === 'parameterPanel' ? '66px' : '12px'}
         width="10px"
       />
-      <Button text="Generate" onClick={onSubmit} />
+      <Button
+        disabled={audioList.length > 0 ? true : false}
+        text="Generate"
+        onClick={onSubmit}
+      />
     </Box>
   );
 };

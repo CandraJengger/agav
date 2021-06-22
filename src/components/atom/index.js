@@ -5,5 +5,15 @@ import Input from './Input';
 import Slider from './Slider';
 import AudioItem from './AudioItem';
 import IconButton from './IconButton';
+import Loading from './Loading';
 
-export { Button, Gap, MainContainer, AudioItem, Input, Slider, IconButton };
+export {
+  Button,
+  Gap,
+  MainContainer,
+  AudioItem,
+  Input,
+  Slider,
+  IconButton,
+  Loading,
+};
