@@ -6,6 +6,7 @@ import Slider from './Slider';
 import AudioItem from './AudioItem';
 import IconButton from './IconButton';
 import Loading from './Loading';
+import Audio from './Audio';
 
 export {
   Button,
@@ -16,4 +17,5 @@ export {
   Slider,
   IconButton,
   Loading,
+  Audio,
 };
