@@ -78,7 +78,7 @@ const GenerateComponent = ({ form, error, onChange, onSubmit, audioList }) => {
         width="10px"
       />
       <Button
-        disabled={audioList.length > 0 ? true : false}
+        disabled={audioList?.length > 0 ? true : false}
         text="Generate"
         onClick={onSubmit}
       />
