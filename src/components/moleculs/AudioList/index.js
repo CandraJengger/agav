@@ -10,7 +10,7 @@ import styles from './styles';
 const useStyles = makeStyles(styles);
 
 const AudioList = ({
-  isPlaying,
+  titleSongCurrentPlaying,
   playAudio,
   audioList = [],
   onVerification,
@@ -32,9 +32,11 @@ const AudioList = ({
                 <AudioItem
                   position={index}
                   audio={audio}
-                  onClick={() => playAudio(audio)}
+                  onClick={() => playAudio(audio, index)}
                   onVerification={onVerification}
-                  playing={isPlaying === audio.title ? true : false}
+                  playing={
+                    titleSongCurrentPlaying === audio.title ? true : false
+                  }
                 />
               </Grid>
             ))}

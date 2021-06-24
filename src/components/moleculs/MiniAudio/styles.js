@@ -27,6 +27,9 @@ const styles = () => ({
     fontSize: 10,
     fontFamily: fonts.nunito,
   },
+  textWrapper: {
+    cursor: 'pointer',
+  },
 });
 
 export default styles;

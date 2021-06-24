@@ -6,7 +6,15 @@ import colors from '../../../assets/theme/colors';
 
 const useStyles = makeStyles(styles);
 
-const IconButton = ({ icon, style, flat, onClick, ...props }) => {
+const IconButton = ({
+  icon,
+  style,
+  flat,
+  onClick,
+  primary,
+  small,
+  ...props
+}) => {
   const classes = useStyles();
 
   const getBoxShadow = () => {
@@ -18,17 +26,38 @@ const IconButton = ({ icon, style, flat, onClick, ...props }) => {
   };
 
   const getColor = () => {
-    if (flat) {
-      return colors['gray-3'];
+    if (primary) {
+      return colors.primary;
+    }
+    return colors['gray-3'];
+  };
+
+  const getWidth = () => {
+    if (small) {
+      return 35;
     }
 
-    return colors.primary;
+    return 55;
+  };
+
+  const getHeight = () => {
+    if (small) {
+      return 35;
+    }
+
+    return 55;
   };
 
   return (
     <IconButtonMui
       className={classes.iconButton}
-      style={{ ...style, boxShadow: getBoxShadow(), color: getColor() }}
+      style={{
+        ...style,
+        boxShadow: getBoxShadow(),
+        color: getColor(),
+        width: getWidth(),
+        height: getHeight(),
+      }}
       onClick={onClick}
     >
       {icon}

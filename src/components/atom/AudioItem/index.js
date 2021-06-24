@@ -19,12 +19,10 @@ const AudioItem = ({
   onClick,
   onVerification,
 }) => {
-  const [audioVerified, setAudioVerified] = React.useState(isVerified);
-
   const classes = useStyles();
 
   const getColor = () => {
-    if (audioVerified) {
+    if (audio?.isVerified) {
       return colors.primary;
     }
 
@@ -49,8 +47,7 @@ const AudioItem = ({
           edge="end"
           aria-label="verification"
           onClick={() => {
-            onVerification(position, !audioVerified);
-            setAudioVerified(!audioVerified);
+            onVerification(position, !audio?.isVerified);
           }}
         >
           <CheckCircleOutlineIcon style={{ fontSize: 18, color: getColor() }} />

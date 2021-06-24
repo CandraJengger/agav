@@ -14,12 +14,12 @@ const Slider = ({ title, onChange }) => {
   const [value, setValue] = React.useState(100);
   const classes = useStyles();
 
-  const handleSliderChange = (event, newValue) => {
+  const onSliderChange = (event, newValue) => {
     setValue(newValue);
     onChange({ name: title.replace(' ', '-'), value: newValue });
   };
 
-  const handleInputChange = (event) => {
+  const onInputChange = (event) => {
     setValue(event.target.value === '' ? '' : Number(event.target.value));
     onChange({
       name: title.replace(' ', '-'),
@@ -27,7 +27,7 @@ const Slider = ({ title, onChange }) => {
     });
   };
 
-  const handleBlur = () => {
+  const onBlur = () => {
     if (value < 0) {
       setValue(0);
     } else if (value > 255) {
@@ -43,13 +43,13 @@ const Slider = ({ title, onChange }) => {
           inputProps={{ 'aria-label': 'link field' }}
           className={classes.input}
           value={value}
-          onChange={handleInputChange}
-          onBlur={handleBlur}
+          onChange={onInputChange}
+          onBlur={onBlur}
         />
         <div style={{ height: 85 }}>
           <CustomSlider
             value={typeof value === 'number' ? value : 0}
-            onChange={handleSliderChange}
+            onChange={onSliderChange}
             valueLabelDisplay="auto"
             orientation="vertical"
             defaultValue={100}

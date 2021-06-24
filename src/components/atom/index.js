@@ -7,6 +7,8 @@ import AudioItem from './AudioItem';
 import IconButton from './IconButton';
 import Loading from './Loading';
 import Audio from './Audio';
+import Wave from './Wave';
+import WaveContainer from './WaveContainer';
 
 export {
   Button,
@@ -18,4 +20,6 @@ export {
   IconButton,
   Loading,
   Audio,
+  Wave,
+  WaveContainer,
 };
