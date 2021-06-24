@@ -12,10 +12,6 @@ const styles = () => ({
     padding: '2.6rem 1.75rem',
     backgroundColor: colors.secondary,
   },
-  audioControl: {
-    display: 'flex',
-    justifyContent: 'space-around',
-  },
   waveWrapper: {
     width: '100%',
     boxSizing: 'border-box',

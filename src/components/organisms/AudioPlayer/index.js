@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { IconButton, Wave, WaveContainer } from '../../atom';
 
-import { MiniAudio } from '../../moleculs';
+import { AudioControls, MiniAudio } from '../../moleculs';
 
 import colors from '../../../assets/theme/colors';
 
@@ -13,10 +13,6 @@ import styles from './styles';
 
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import PauseIcon from '@material-ui/icons/Pause';
-import SkipNextIcon from '@material-ui/icons/SkipNext';
 
 const useStyles = makeStyles(styles);
 
@@ -66,7 +62,10 @@ const AudioPlayer = ({
       <MiniAudio
         audio={audio}
         customIcon
-        customIconClick={onHideAudioPlayer}
+        customIconClick={() => {
+          waveform.current.pause();
+          onHideAudioPlayer();
+        }}
         icon={<ExpandLessIcon style={{ color: colors.secondary }} />}
       />
       <Box className={classes.waveWrapper}>
@@ -92,23 +91,13 @@ const AudioPlayer = ({
         </Box>
       </Box>
       <Box className={classes.audioSection}>
-        <Box className={classes.audioControl}>
-          <IconButton
-            icon={<SkipPreviousIcon />}
-            flat
-            onClick={() => onPrevAudio(waveform.current)}
-          />
-          <IconButton
-            icon={isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
-            onClick={() => onPlayPause(waveform.current)}
-            primary
-          />
-          <IconButton
-            icon={<SkipNextIcon />}
-            flat
-            onClick={() => onNextAudio(waveform.current)}
-          />
-        </Box>
+        <AudioControls
+          center
+          isPlaying={isPlaying}
+          onPlayPause={() => onPlayPause(waveform.current)}
+          onNextAudio={() => onNextAudio(waveform.current)}
+          onPrevAudio={() => onPrevAudio(waveform.current)}
+        />
       </Box>
     </Box>
   );

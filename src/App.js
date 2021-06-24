@@ -39,6 +39,9 @@ function App() {
 
   const handleOpenAudioPlayer = () => {
     setOpen((prev) => !prev);
+    if (isPlaying) {
+      setIsPlaying(false);
+    }
   };
 
   const onSubmit = () => {
