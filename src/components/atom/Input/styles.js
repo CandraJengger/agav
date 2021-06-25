@@ -14,7 +14,7 @@ const styles = () => ({
     '& input': {
       fontFamily: fonts.nunito,
       '&::placeholder': {
-        color: colors['gray-3'],
+        color: colors['gray-4'],
       },
     },
   },

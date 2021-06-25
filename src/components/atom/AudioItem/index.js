@@ -23,10 +23,18 @@ const AudioItem = ({
 
   const getColor = () => {
     if (audio?.isVerified) {
-      return colors.primary;
+      return colors.white;
     }
 
     return colors['gray-3'];
+  };
+
+  const getBackground = () => {
+    if (audio?.isVerified) {
+      return colors.pink;
+    }
+
+    return 'inherit';
   };
 
   return (
@@ -38,7 +46,11 @@ const AudioItem = ({
       />
       <ListItemSecondaryAction className={classes.actionSection}>
         {playing && (
-          <Typography component="span" className={classes.playing}>
+          <Typography
+            component="span"
+            className={classes.playing}
+            style={{ paddingRight: 8 }}
+          >
             Playing
           </Typography>
         )}
@@ -50,7 +62,14 @@ const AudioItem = ({
             onVerification(position, !audio?.isVerified);
           }}
         >
-          <CheckCircleOutlineIcon style={{ fontSize: 18, color: getColor() }} />
+          <CheckCircleOutlineIcon
+            style={{
+              fontSize: 18,
+              color: getColor(),
+              background: getBackground(),
+              borderRadius: '50%',
+            }}
+          />
         </IconButton>
       </ListItemSecondaryAction>
     </ListItem>

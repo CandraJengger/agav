@@ -231,6 +231,7 @@ function App() {
                       Audio List
                     </Typography>
                     <Button
+                      type="secondary"
                       text="Send audio list"
                       onClick={onSendVerifiedList}
                     />

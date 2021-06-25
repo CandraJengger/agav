@@ -58,7 +58,11 @@ const AudioList = ({
         {withButtonSend && (
           <>
             <Gap height="26px" width="10px" />
-            <Button text="Send a verified list" onClick={onSendVerifiedList} />
+            <Button
+              text="Send audio list"
+              type="secondary"
+              onClick={onSendVerifiedList}
+            />
           </>
         )}
         <Gap height="26px" width="10px" />

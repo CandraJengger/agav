@@ -1,6 +1,5 @@
 const styles = () => ({
   root: {
-    background: '#2F2F2F',
     borderRadius: 500,
     border: 0,
     color: '#fff',

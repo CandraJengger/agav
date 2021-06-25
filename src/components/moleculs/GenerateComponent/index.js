@@ -29,7 +29,14 @@ const AccordionDetails = withStyles(accordionDetailsStyles)(
 
 const useStyles = makeStyles(styles);
 
-const GenerateComponent = ({ form, error, onChange, onSubmit, audioList }) => {
+const GenerateComponent = ({
+  form,
+  error,
+  onChange,
+  onSubmit,
+  audioList,
+  bgParameter,
+}) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -52,6 +59,7 @@ const GenerateComponent = ({ form, error, onChange, onSubmit, audioList }) => {
         square
         expanded={expanded === 'parameterPanel'}
         onChange={handleChange('parameterPanel')}
+        back
       >
         <AccordionSummary aria-controls="parameter-content" id="parameterId">
           <Typography className={classes.title}>Parameter</Typography>
@@ -74,14 +82,10 @@ const GenerateComponent = ({ form, error, onChange, onSubmit, audioList }) => {
         </AccordionDetails>
       </Accordion>
       <Gap
-        height={expanded === 'parameterPanel' ? '66px' : '12px'}
+        height={expanded === 'parameterPanel' ? '46px' : '12px'}
         width="10px"
       />
-      <Button
-        disabled={audioList?.length > 0 ? true : false}
-        text="Generate"
-        onClick={onSubmit}
-      />
+      <Button text="Generate" onClick={onSubmit} />
     </Box>
   );
 };
