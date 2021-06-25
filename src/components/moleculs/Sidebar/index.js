@@ -17,6 +17,7 @@ const Sidebar = ({ form, error, onSubmit, onChange }) => {
   };
 
   React.useEffect(() => {
+    setWidth(getWidth());
     window.addEventListener('resize', () => {
       setWidth(getWidth());
     });
@@ -43,4 +44,4 @@ const Sidebar = ({ form, error, onSubmit, onChange }) => {
   );
 };
 
-export default Sidebar;
+export default React.memo(Sidebar);
