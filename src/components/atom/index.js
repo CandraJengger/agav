@@ -9,6 +9,7 @@ import Loading from './Loading';
 import Audio from './Audio';
 import Wave from './Wave';
 import WaveContainer from './WaveContainer';
+import Divider from './Divider';
 
 export {
   Button,
@@ -22,4 +23,5 @@ export {
   Audio,
   Wave,
   WaveContainer,
+  Divider,
 };

@@ -8,7 +8,7 @@ const AppLayout = ({ children }) => {
   return (
     <>
       <Hidden mdUp>
-        <Navbar />
+        <Navbar position="sticky" />
       </Hidden>
       <MainContainer>{children}</MainContainer>
     </>

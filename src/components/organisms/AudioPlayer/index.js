@@ -36,14 +36,14 @@ const AudioPlayer = ({
         console.log((waveform.current.mediaContainer.innerHTML = ''));
       }
       waveform.current = WaveSurfer.create({
-        waveColor: '#D9DCFF',
-        progressColor: '#f48fb1',
+        waveColor: colors['gray-2'],
+        progressColor: colors.pink,
         cursorColor: '#8c4f64',
         cursorWidth: 1,
         container: containerWaveRef.current,
         backend: 'WebAudio',
         barWidth: 3,
-        barRadius: 5,
+        barRadius: 3,
         barHeight: 3,
         barGap: 3,
         height: 141,

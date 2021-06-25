@@ -15,20 +15,57 @@ const AudioList = ({
   audioList = [],
   onVerification,
   onSendVerifiedList,
+  withButtonSend,
+  textAlign,
+  titleBold,
+  withTitle,
 }) => {
   const classes = useStyles();
 
+  const getTextAlign = () => {
+    if (textAlign === 'center') {
+      return 'center';
+    }
+
+    if (textAlign === 'left') {
+      return 'left';
+    }
+
+    if (textAlign === 'right') {
+      return 'right';
+    }
+  };
+
+  const getBold = () => {
+    if (titleBold) {
+      return 'bold';
+    }
+
+    return 400;
+  };
+
   return (
     <Box className={classes.wrapper}>
-      <Typography className={classes.title}>Audio List</Typography>
+      {withTitle && (
+        <Typography
+          className={classes.title}
+          style={{ textAlign: getTextAlign(), fontWeight: getBold() }}
+        >
+          Audio List
+        </Typography>
+      )}
       <Box className={classes.listSection}>
-        <Gap height="26px" width="10px" />
-        <Button text="Send a verified list" onClick={onSendVerifiedList} />
+        {withButtonSend && (
+          <>
+            <Gap height="26px" width="10px" />
+            <Button text="Send a verified list" onClick={onSendVerifiedList} />
+          </>
+        )}
         <Gap height="26px" width="10px" />
         <List dense={false}>
           <Grid container spacing={2}>
             {audioList.map((audio, index) => (
-              <Grid item key={index} xs={12} md={6}>
+              <Grid item key={index} xs={12} md={12}>
                 <AudioItem
                   position={index}
                   audio={audio}

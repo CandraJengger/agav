@@ -23,6 +23,7 @@ const MiniAudio = ({
   icon,
   style,
   fixed,
+  position,
 }) => {
   const classes = useStyles();
 
@@ -38,8 +39,23 @@ const MiniAudio = ({
     return 'relative';
   };
 
+  const getPosition = () => {
+    if (position === 'start') {
+      return 'flex-start';
+    }
+
+    return 'space-between';
+  };
+
   return (
-    <Box className={classes.wrapper} style={{ ...style, position: getFixed() }}>
+    <Box
+      className={classes.wrapper}
+      style={{
+        ...style,
+        position: getFixed(),
+        justifyContent: getPosition(),
+      }}
+    >
       <Box onClick={handleOpenAudioPlayer} className={classes.textWrapper}>
         <Typography className={classes.title}>{audio?.title}</Typography>
         <Typography className={classes.subTitle}>
@@ -54,7 +70,10 @@ const MiniAudio = ({
       {customIcon ? (
         <IconButton onClick={customIconClick}>{icon}</IconButton>
       ) : (
-        <IconButton onClick={() => onPlayPause(false)}>
+        <IconButton
+          onClick={() => onPlayPause(false)}
+          style={{ marginLeft: 20 }}
+        >
           {' '}
           {isPlaying ? (
             <PauseIcon style={{ color: colors.secondary }} />

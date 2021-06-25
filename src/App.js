@@ -4,6 +4,9 @@ import './App.css';
 import Grid from '@material-ui/core/Grid';
 import Slide from '@material-ui/core/Slide';
 import Hidden from '@material-ui/core/Hidden';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import WaveSurfer from 'wavesurfer.js';
 import {
   Gap,
   AppLayout,
@@ -13,8 +16,15 @@ import {
   AudioPlayer,
   MiniAudio,
   Loading,
+  Wave,
+  WaveContainer,
+  AudioControls,
+  Button,
+  Divider,
 } from './components';
 import audioDummy from './data/audio-dummy';
+import colors from './assets/theme/colors';
+import fonts from './assets/fonts';
 
 function App() {
   const [form, setForm] = React.useState({
@@ -36,6 +46,35 @@ function App() {
   const [open, setOpen] = React.useState(false);
 
   const audioRef = React.useRef();
+  let waveform = React.useRef();
+  const containerWaveRef = React.useRef();
+
+  React.useEffect(() => {
+    if (currentAudio) {
+      if (window.innerWidth > 960) {
+        if (waveform.current !== undefined) {
+          console.log((waveform.current.mediaContainer.innerHTML = ''));
+        }
+        waveform.current = WaveSurfer.create({
+          waveColor: colors.white,
+          progressColor: colors.pink,
+          container: containerWaveRef.current,
+          backend: 'WebAudio',
+          barWidth: 3,
+          barRadius: 3,
+          barHeight: 3,
+          barGap: 3,
+          height: 55,
+          responsive: true,
+        });
+        waveform.current.load(currentAudio?.path);
+
+        waveform.current.on('finish', () => {
+          onStopAudio();
+        });
+      }
+    }
+  }, [currentAudio]);
 
   const handleOpenAudioPlayer = () => {
     setOpen((prev) => !prev);
@@ -165,37 +204,89 @@ function App() {
         </Grid>
         <Grid item xs={12} md={8}>
           <Gap height="61px" width="10px" />
-          <GenerateComponent
-            form={form}
-            error={error}
-            onChange={onChange}
-            audioList={audioList}
-            onSubmit={onSubmit}
-          />
-          <Gap height="44px" width="10px" />
+          <Hidden mdUp>
+            <GenerateComponent
+              form={form}
+              error={error}
+              onChange={onChange}
+              audioList={audioList}
+              onSubmit={onSubmit}
+            />
+            <Gap height="44px" width="10px" />
+          </Hidden>
+          <Hidden smDown>
+            <Box paddingLeft="38px" paddingRight="38px">
+              {audioList.length > 0 && (
+                <>
+                  <Box display="flex" justifyContent="space-between">
+                    <Typography
+                      variant="h4"
+                      component="h1"
+                      style={{
+                        fontFamily: fonts.nunito,
+                        fontWeight: 700,
+                        color: colors.primary,
+                      }}
+                    >
+                      Audio List
+                    </Typography>
+                    <Button
+                      text="Send audio list"
+                      onClick={onSendVerifiedList}
+                    />
+                  </Box>
+                  <Gap height="40px" width="10px" />
+                </>
+              )}
+            </Box>
+          </Hidden>
+
           {loading && <Loading text="Downloading.." />}
           {audioList.length > 0 && (
-            <AudioList
-              audioList={audioList}
-              titleSongCurrentPlaying={titleSongCurrentPlaying}
-              playAudio={onAudioPlayingNow}
-              onVerification={onUpdateAudio}
-              onSendVerifiedList={onSendVerifiedList}
-            />
+            <>
+              {/* hidden onTablet */}
+              <Hidden mdUp>
+                <AudioList
+                  withButtonSend
+                  audioList={audioList}
+                  titleSongCurrentPlaying={titleSongCurrentPlaying}
+                  playAudio={onAudioPlayingNow}
+                  onVerification={onUpdateAudio}
+                  onSendVerifiedList={onSendVerifiedList}
+                  withTitle
+                />
+              </Hidden>
+              {/* hidden onMobile */}
+              <Hidden smDown>
+                <AudioList
+                  audioList={audioList}
+                  titleSongCurrentPlaying={titleSongCurrentPlaying}
+                  playAudio={onAudioPlayingNow}
+                  onVerification={onUpdateAudio}
+                  onSendVerifiedList={onSendVerifiedList}
+                  textAlign="center"
+                  titleBold
+                />
+              </Hidden>
+            </>
           )}
         </Grid>
       </Grid>
 
       {currentAudio && (
-        <MiniAudio
-          audio={currentAudio}
-          audioRef={audioRef}
-          onPlayPause={onPlayPause}
-          isPlaying={isPlaying}
-          onStopAudio={onStopAudio}
-          handleOpenAudioPlayer={handleOpenAudioPlayer}
-          fixed
-        />
+        <>
+          <Hidden mdUp>
+            <MiniAudio
+              audio={currentAudio}
+              audioRef={audioRef}
+              onPlayPause={onPlayPause}
+              isPlaying={isPlaying}
+              onStopAudio={onStopAudio}
+              handleOpenAudioPlayer={handleOpenAudioPlayer}
+              fixed
+            />
+          </Hidden>
+        </>
       )}
       {currentAudio && (
         <Slide direction="up" in={open} mountOnEnter unmountOnExit>
@@ -214,6 +305,49 @@ function App() {
           </div>
         </Slide>
       )}
+      <Hidden smDown>
+        <div></div>
+        {currentAudio && (
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            position="fixed"
+            bottom="0"
+            right="0"
+            left="0"
+            paddingTop="12px"
+            paddingBottom="12px"
+            paddingLeft="48px"
+            paddingRight="48px"
+            alignItems="center"
+            style={{ background: colors.primary }}
+          >
+            <WaveContainer type="primary" height="80px">
+              <Wave id="waveform" ref={containerWaveRef} />
+            </WaveContainer>
+            <Box marginLeft="40px">
+              <Typography
+                style={{ color: colors.white, fontFamily: fonts.nunito }}
+                variant="h6"
+              >
+                {currentAudio?.title.length > 20
+                  ? `${currentAudio?.title.substring(0, 20)}...`
+                  : currentAudio?.title}
+              </Typography>
+              <Gap height="16px" width="10px" />
+              <AudioControls
+                type="primary"
+                center
+                isPlaying={isPlaying}
+                onPlayPause={() => onPlayPause(waveform.current)}
+                onNextAudio={() => onNextAudio(waveform.current)}
+                onPrevAudio={() => onPrevAudio(waveform.current)}
+              />
+            </Box>
+            <Gap height="46px" width="10px" />
+          </Box>
+        )}
+      </Hidden>
     </AppLayout>
   );
 }

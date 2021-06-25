@@ -8,20 +8,44 @@ const useStyles = makeStyles(() => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '165px',
     boxSizing: 'border-box',
     width: '100%',
-    background: colors.secondary,
     padding: '12px',
-    boxShadow: '8px 8px 16px #DFDFDF, -8px -8px 16px #FFFFFF',
     borderRadius: 8,
   },
 }));
 
-const WaveformContainer = (props) => {
+const WaveformContainer = ({ type, height, children }) => {
   const classes = useStyles();
 
-  return <div className={classes.container}>{props.children}</div>;
+  const getBackground = () => {
+    if (type === 'primary') {
+      return colors.primary;
+    }
+
+    return colors.secondary;
+  };
+
+  const getBoxShadow = () => {
+    if (type === 'primary') {
+      return '8px 8px 15px #282828, -8px -8px 15px #363636';
+    }
+
+    return '8px 8px 16px #DFDFDF, -8px -8px 16px #FFFFFF';
+  };
+
+  return (
+    <div
+      className={classes.container}
+      style={{
+        background: getBackground(),
+        boxShadow: getBoxShadow(),
+        height: height ? height : 165,
+      }}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default WaveformContainer;

@@ -17,20 +17,48 @@ const AudioControls = ({
   onNextAudio,
   onPrevAudio,
   onPlayPause,
+  type,
 }) => {
   const classes = useStyles();
 
   return (
     <Box className={classes.audioControl}>
-      <IconButton icon={<SkipPreviousIcon />} flat onClick={onPrevAudio} />
-      <Gap height="2px" width="28px" />
-      <IconButton
-        icon={isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
-        onClick={onPlayPause}
-        primary
-      />
-      <Gap height="2px" width="28px" />
-      <IconButton icon={<SkipNextIcon />} flat onClick={onNextAudio} />
+      {type === 'primary' ? (
+        <>
+          <IconButton
+            icon={<SkipPreviousIcon />}
+            flat="inak"
+            bg="primary"
+            onClick={onPrevAudio}
+          />
+          <Gap height="2px" width="28px" />
+          <IconButton
+            icon={isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
+            onClick={onPlayPause}
+            flat
+            bg="primary"
+          />
+          <Gap height="2px" width="28px" />
+          <IconButton
+            icon={<SkipNextIcon />}
+            flat
+            bg="primary"
+            onClick={onNextAudio}
+          />
+        </>
+      ) : (
+        <>
+          <IconButton icon={<SkipPreviousIcon />} flat onClick={onPrevAudio} />
+          <Gap height="2px" width="28px" />
+          <IconButton
+            icon={isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
+            onClick={onPlayPause}
+            pressed
+          />
+          <Gap height="2px" width="28px" />
+          <IconButton icon={<SkipNextIcon />} flat onClick={onNextAudio} />
+        </>
+      )}
     </Box>
   );
 };

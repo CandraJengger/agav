@@ -9,7 +9,7 @@ const sliderStyles = () => ({
   thumb: {
     height: 14,
     width: 14,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     marginTop: -8,
     marginLeft: -12,
     boxShadow: '-3px -3px 6px #CCCCCC, 3px 3px 6px #FFFFFF',
@@ -36,7 +36,7 @@ const sliderStyles = () => ({
 
 export const additionalStyles = () => ({
   title: {
-    color: colors['gray-3'],
+    color: colors.primary,
     textTransform: 'capitalize',
     fontSize: '0.75rem',
     textAlign: 'center',

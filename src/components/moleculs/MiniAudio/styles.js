@@ -8,7 +8,6 @@ const styles = () => ({
     left: 0,
     width: '100%',
     display: 'flex',
-    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: colors.primary,
     borderRadius: '12px 12px 0px 0px',

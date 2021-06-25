@@ -11,25 +11,38 @@ const IconButton = ({
   style,
   flat,
   onClick,
-  primary,
   small,
+  pressed,
+  bg,
   ...props
 }) => {
   const classes = useStyles();
 
   const getBoxShadow = () => {
+    if (flat && bg === 'primary') {
+      console.log('con');
+      return '6px 6px 11px #282828, -6px -6px 11px #363636';
+    }
+
+    if (pressed && bg === 'primary') {
+      return 'inset 8px 8px 15px #282828, inset -8px -8px 15px #363636';
+    }
+
     if (flat) {
       return '-8px -8px 16px #FFFFFF, 8px 8px 16px #DFDFDF';
     }
 
-    return 'inset -8px -8px 16px #FFFFFF, inset 8px 8px 16px #DFDFDF';
+    if (pressed) {
+      return 'inset -8px -8px 16px #FFFFFF, inset 8px 8px 16px #DFDFDF';
+    }
   };
 
   const getColor = () => {
-    if (primary) {
-      return colors.primary;
+    if (bg === 'primary') {
+      console.log('color :>> ', bg);
+      return colors.white;
     }
-    return colors['gray-3'];
+    return colors.primary;
   };
 
   const getWidth = () => {
@@ -48,11 +61,20 @@ const IconButton = ({
     return 55;
   };
 
+  const getBackground = () => {
+    if (bg === 'primary') {
+      return colors.primary;
+    }
+
+    return colors.secondary;
+  };
+
   return (
     <IconButtonMui
       className={classes.iconButton}
       style={{
         ...style,
+        background: getBackground(),
         boxShadow: getBoxShadow(),
         color: getColor(),
         width: getWidth(),

@@ -6,10 +6,10 @@ import styles from './styles';
 
 const useStyles = makeStyles(styles);
 
-const Navbar = () => {
+const Navbar = ({ ...props }) => {
   const classes = useStyles();
   return (
-    <AppBar className={classes.root} position="sticky">
+    <AppBar className={classes.root} {...props}>
       <Typography component="h1" className={classes.title}>
         Agav
       </Typography>
