@@ -8,11 +8,11 @@ const Sidebar = ({ form, error, onSubmit, onChange }) => {
 
   const getWidth = () => {
     if (window) {
-      if (window.innerWidth > 1150) {
+      if (window.innerWidth > 1000) {
         return '400px';
       }
 
-      return '300px';
+      return '360px';
     }
   };
 
@@ -21,7 +21,7 @@ const Sidebar = ({ form, error, onSubmit, onChange }) => {
     window.addEventListener('resize', () => {
       setWidth(getWidth());
     });
-  });
+  }, []);
 
   return (
     <Box

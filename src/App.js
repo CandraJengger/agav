@@ -20,13 +20,21 @@ import {
   WaveContainer,
   AudioControls,
   Button,
-  Divider,
 } from './components';
-import audioDummy from './data/audio-dummy';
 import colors from './assets/theme/colors';
 import fonts from './assets/fonts';
+import { GlobalContext } from './context/Provider';
+import getAudioList from './context/actions/audioList/getAudioList';
 
 function App() {
+  // context
+  const {
+    audioListDispatch,
+    audioListState: {
+      getAudioList: { loading, error },
+    },
+  } = React.useContext(GlobalContext);
+
   const [form, setForm] = React.useState({
     link: '',
     'sample-rate': 100,
@@ -35,14 +43,16 @@ function App() {
     frames: 100,
     threshold: 100,
   });
-  const [error, setError] = React.useState(false);
   const [titleSongCurrentPlaying, setTitleSongCurrentPlaying] =
     React.useState(null);
   const [isPlaying, setIsPlaying] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
   const [currentAudio, setCurrentAudio] = React.useState(null);
   const [audioList, setAudioList] = React.useState([]);
   const [audioCurrentIndex, setAudioCurrentIndex] = React.useState(0);
+  const [inputIsAlready, setInputIsAlready] = React.useState({
+    status: false,
+    message: '',
+  });
   const [open, setOpen] = React.useState(false);
 
   const audioRef = React.useRef();
@@ -84,17 +94,27 @@ function App() {
   };
 
   const onSubmit = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      if (form.link) {
-        console.log('ini yang di submit', form);
-        setAudioList(audioDummy);
-        return;
-      }
+    const prefix = new RegExp('youtu');
+    if (form.link.length === 0) {
+      setInputIsAlready({
+        status: true,
+        message: 'This field is required',
+      });
+      return;
+    }
 
-      setError(true);
-    }, 1500);
+    if (!prefix.test(form.link)) {
+      setInputIsAlready({
+        status: true,
+        message: 'Please enter a valid youtube link',
+      });
+      return;
+    }
+
+    if (form.link && form.link.length !== 0) {
+      getAudioList(form)(audioListDispatch)(setAudioList);
+      return;
+    }
   };
 
   const onSendVerifiedList = () => {
@@ -102,8 +122,11 @@ function App() {
   };
 
   const onChange = ({ name, value }) => {
+    setInputIsAlready(false);
+    if (form.link.length < 1) {
+      setInputIsAlready(true);
+    }
     setForm({ ...form, [name]: value });
-    setError(false);
   };
 
   const onAudioPlayingNow = (audio, index) => {
@@ -196,7 +219,7 @@ function App() {
           <Hidden smDown>
             <Sidebar
               form={form}
-              error={error}
+              error={inputIsAlready}
               onChange={onChange}
               onSubmit={onSubmit}
             />
@@ -207,10 +230,10 @@ function App() {
           <Hidden mdUp>
             <GenerateComponent
               form={form}
-              error={error}
               onChange={onChange}
               audioList={audioList}
               onSubmit={onSubmit}
+              error={inputIsAlready}
             />
             <Gap height="44px" width="10px" />
           </Hidden>
@@ -243,6 +266,26 @@ function App() {
           </Hidden>
 
           {loading && <Loading text="Downloading.." />}
+          {error && (
+            <Box
+              paddingLeft="30px"
+              textAlign="center"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              flexDirection="column"
+            >
+              <Typography
+                variant="h4"
+                component="span"
+                style={{ fontFamily: fonts.nunito }}
+              >
+                Something went wrong
+              </Typography>
+              <Gap height="28px" width="10px" />
+              <Button text="Retry" onClick={onSubmit} />
+            </Box>
+          )}
           {audioList.length > 0 && (
             <>
               {/* hidden onTablet */}

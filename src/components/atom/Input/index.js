@@ -10,9 +10,10 @@ const Input = ({ error, onChange }) => {
   const classes = useStyles();
 
   const getVisibility = () => {
-    if (error) {
+    if (error.status) {
       return 'visible';
     }
+
     return 'hidden';
   };
 
@@ -22,16 +23,16 @@ const Input = ({ error, onChange }) => {
         placeholder="Input Link"
         inputProps={{ 'aria-label': 'link field' }}
         className={classes.root}
-        onChange={(event) =>
-          onChange({ name: 'link', value: event.target.value })
-        }
+        onChange={(event) => {
+          onChange({ name: 'link', value: event.target.value });
+        }}
       />
       <Typography
         component="p"
         className={classes.error}
         style={{ visibility: getVisibility() }}
       >
-        This field is required
+        {error.message}
       </Typography>
     </>
   );

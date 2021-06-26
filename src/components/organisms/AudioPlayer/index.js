@@ -55,7 +55,7 @@ const AudioPlayer = ({
         onStopAudio();
       });
     }
-  }, [audio]);
+  }, [audio, onStopAudio]);
 
   return (
     <Box className={classes.container}>

@@ -22,6 +22,8 @@ const AudioList = ({
 }) => {
   const classes = useStyles();
 
+  console.log('audioList :>> ', audioList);
+
   const getTextAlign = () => {
     if (textAlign === 'center') {
       return 'center';

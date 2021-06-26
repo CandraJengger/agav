@@ -16,7 +16,9 @@ const Audio = ({ audioRef, onStopAudio, src }) => {
         onStopAudio();
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTime]);
+
   return (
     <audio
       ref={audioRef}
@@ -25,6 +27,7 @@ const Audio = ({ audioRef, onStopAudio, src }) => {
         setDuration(e.currentTarget.duration.toFixed(2));
       }}
       onTimeUpdate={getCurrDuration}
+      crossOrigin="anonymous"
     ></audio>
   );
 };
