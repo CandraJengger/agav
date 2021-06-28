@@ -20,7 +20,6 @@ const IconButton = ({
 
   const getBoxShadow = () => {
     if (flat && bg === 'primary') {
-      console.log('con');
       return '6px 6px 11px #282828, -6px -6px 11px #363636';
     }
 
@@ -39,7 +38,6 @@ const IconButton = ({
 
   const getColor = () => {
     if (bg === 'primary') {
-      console.log('color :>> ', bg);
       return colors.white;
     }
     return colors.primary;

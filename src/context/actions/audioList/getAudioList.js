@@ -21,7 +21,7 @@ const getAudioList = (form) => (dispatch) => (onSuccess) => {
   });
 
   axios
-    .post('http://localhost:5000/urls/', requestPayload)
+    .post('http://localhost:5000/', requestPayload)
     .then((res) => {
       dispatch({
         type: GET_AUDIO_LIST_SUCCESS,
@@ -29,11 +29,11 @@ const getAudioList = (form) => (dispatch) => (onSuccess) => {
       });
 
       console.log('res.data.data :>> ', res.data.data);
-      // onSuccess(res.data.data);
+      onSuccess(res.data.data);
       // onSuccess(audioDummy);
     })
     .catch((err) => {
-      onSuccess(audioDummy);
+      // onSuccess(audioDummy);
       dispatch({
         type: GET_AUDIO_LIST_FAIL,
         payload: 'Something went wrong',

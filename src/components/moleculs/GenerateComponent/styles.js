@@ -3,6 +3,8 @@ import colors from '../../../assets/theme/colors';
 
 const styles = () => ({
   root: {
+    maxWidth: '500px',
+    margin: '0 auto',
     paddingLeft: 39,
     paddingRight: 39,
     '& .MuiPaper-root': {

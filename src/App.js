@@ -25,6 +25,7 @@ import colors from './assets/theme/colors';
 import fonts from './assets/fonts';
 import { GlobalContext } from './context/Provider';
 import getAudioList from './context/actions/audioList/getAudioList';
+import audioDummy from './data/audio-dummy';
 
 function App() {
   // context
@@ -112,7 +113,8 @@ function App() {
     }
 
     if (form.link && form.link.length !== 0) {
-      getAudioList(form)(audioListDispatch)(setAudioList);
+      // getAudioList(form)(audioListDispatch)(setAudioList);
+      setAudioList(audioDummy);
       return;
     }
   };

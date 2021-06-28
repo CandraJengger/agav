@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 const Audio = ({ audioRef, onStopAudio, src }) => {
+  console.log(src);
+
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
 
