@@ -10,19 +10,19 @@ const CustomSlider = withStyles(styles)(SliderMui);
 
 const useStyles = makeStyles(additionalStyles);
 
-const Slider = ({ title, onChange }) => {
-  const [value, setValue] = React.useState(100);
+const Slider = ({ title, onChange, defaultValue, maxValue, ...props }) => {
+  const [value, setValue] = React.useState(defaultValue);
   const classes = useStyles();
 
   const onSliderChange = (event, newValue) => {
     setValue(newValue);
-    onChange({ name: title.replace(' ', '-'), value: newValue });
+    onChange({ name: title.replace(' ', '_'), value: newValue });
   };
 
   const onInputChange = (event) => {
     setValue(event.target.value === '' ? '' : Number(event.target.value));
     onChange({
-      name: title.replace(' ', '-'),
+      name: title.replace(' ', '_'),
       value: event.target.value === '' ? '' : Number(event.target.value),
     });
   };
@@ -30,8 +30,8 @@ const Slider = ({ title, onChange }) => {
   const onBlur = () => {
     if (value < 0) {
       setValue(0);
-    } else if (value > 255) {
-      setValue(255);
+    } else if (value > maxValue) {
+      setValue(maxValue);
     }
   };
 
@@ -52,9 +52,10 @@ const Slider = ({ title, onChange }) => {
             onChange={onSliderChange}
             valueLabelDisplay="auto"
             orientation="vertical"
-            defaultValue={100}
-            max={255}
+            defaultValue={defaultValue}
+            max={maxValue}
             aria-labelledby="vertical-slider"
+            {...props}
           />
         </div>
 

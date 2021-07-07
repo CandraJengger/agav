@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import ReactAudioPlayer from 'react-audio-player';
 
 const Audio = ({ audioRef, onStopAudio, src }) => {
-  console.log(src);
-
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
 
@@ -31,6 +30,16 @@ const Audio = ({ audioRef, onStopAudio, src }) => {
       onTimeUpdate={getCurrDuration}
       crossOrigin="anonymous"
     ></audio>
+    // <ReactAudioPlayer
+    // src={`http://localhost:5000/${src}`}
+    //   src={src}
+    //   ref={audioRef}
+    //   onLoadedData={(e) => {
+    //     setDuration(e.currentTarget.duration.toFixed(2));
+    //   }}
+    //   onTimeUpdate={getCurrDuration}
+    //   crossOrigin="anonymous"
+    // />
   );
 };
 

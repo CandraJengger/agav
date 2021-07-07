@@ -73,11 +73,38 @@ const GenerateComponent = ({
         </AccordionSummary>
         <AccordionDetails>
           <Box className={classes.boxSlider}>
-            <Slider title="sample rate" onChange={onChange} />
-            <Slider title="min duration" onChange={onChange} />
-            <Slider title="max duration" onChange={onChange} />
-            <Slider title="frames" onChange={onChange} />
-            <Slider title="threshold" onChange={onChange} />
+            <Slider
+              title="sample rate"
+              onChange={onChange}
+              defaultValue={8}
+              maxValue={48}
+              step={8}
+            />
+            <Slider
+              title="min duration"
+              onChange={onChange}
+              defaultValue={0}
+              maxValue={30}
+            />
+            <Slider
+              title="max duration"
+              onChange={onChange}
+              defaultValue={3}
+              maxValue={30}
+            />
+            <Slider
+              title="frame"
+              onChange={onChange}
+              defaultValue={10}
+              maxValue={30}
+              step={10}
+            />
+            <Slider
+              title="aggressive"
+              onChange={onChange}
+              defaultValue={3}
+              maxValue={3}
+            />
           </Box>
         </AccordionDetails>
       </Accordion>

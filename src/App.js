@@ -38,11 +38,11 @@ function App() {
 
   const [form, setForm] = React.useState({
     link: '',
-    'sample-rate': 100,
-    'max-duration': 100,
-    'min-duration': 100,
-    frames: 100,
-    threshold: 100,
+    sample_rate: 8000,
+    max_duration: 3,
+    min_duration: 0,
+    frame: 10,
+    aggressive: 3,
   });
   const [titleSongCurrentPlaying, setTitleSongCurrentPlaying] =
     React.useState(null);
@@ -113,8 +113,9 @@ function App() {
     }
 
     if (form.link && form.link.length !== 0) {
-      // getAudioList(form)(audioListDispatch)(setAudioList);
-      setAudioList(audioDummy);
+      console.log(form);
+      getAudioList(form)(audioListDispatch)(setAudioList);
+      // setAudioList(audioDummy);
       return;
     }
   };
@@ -156,7 +157,7 @@ function App() {
     setAudioList(tempState);
   };
 
-  const onPlayPause = (waveform) => {
+  const onPlayPause = async (waveform) => {
     const audioRf = audioRef.current;
 
     if (!isPlaying) {

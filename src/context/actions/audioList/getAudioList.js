@@ -9,19 +9,22 @@ import audioDummy from '../../../data/audio-dummy.js';
 const getAudioList = (form) => (dispatch) => (onSuccess) => {
   const requestPayload = {
     url: form.link || '',
-    sample_rate: 8000,
-    min_duration: '00:00',
-    max_duration: '00:10',
-    frame: 10,
-    aggressive: 3,
+    sample_rate:
+      form.sample_rate < 1000 ? form.sample_rate * 1000 : form.sample_rate,
+    min_duration: form.min_duration,
+    max_duration: form.max_duration,
+    frame: form.frame,
+    aggressive: form.aggressive,
   };
 
   dispatch({
     type: GET_AUDIO_LIST_LOADING,
   });
 
+  console.log(requestPayload);
+
   axios
-    .post('http://localhost:5000/', requestPayload)
+    .post('https://api-agav.herokuapp.com/urls/', requestPayload)
     .then((res) => {
       dispatch({
         type: GET_AUDIO_LIST_SUCCESS,
