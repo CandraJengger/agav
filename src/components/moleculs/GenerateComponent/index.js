@@ -76,6 +76,7 @@ const GenerateComponent = ({
             <Slider
               title="sample rate"
               onChange={onChange}
+              min={8}
               defaultValue={8}
               maxValue={48}
               step={8}
@@ -95,6 +96,7 @@ const GenerateComponent = ({
             <Slider
               title="frame"
               onChange={onChange}
+              min={10}
               defaultValue={10}
               maxValue={30}
               step={10}
@@ -102,6 +104,7 @@ const GenerateComponent = ({
             <Slider
               title="aggressive"
               onChange={onChange}
+              min={1}
               defaultValue={3}
               maxValue={3}
             />
