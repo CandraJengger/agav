@@ -49,9 +49,7 @@ const AudioPlayer = ({
         height: 141,
         responsive: true,
       });
-      waveform.current.load(
-        `https://api-agav.herokuapp.com/${audio?.path}`
-      );
+      waveform.current.load(audio?.path);
 
       waveform.current.on('finish', () => {
         onStopAudio();

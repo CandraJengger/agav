@@ -25,6 +25,7 @@ import colors from './assets/theme/colors';
 import fonts from './assets/fonts';
 import { GlobalContext } from './context/Provider';
 import getAudioList from './context/actions/audioList/getAudioList';
+import sendAudioList from './context/actions/audioList/sendAudioList';
 import audioDummy from './data/audio-dummy';
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
   const [form, setForm] = React.useState({
     link: '',
     sample_rate: 8000,
-    max_duration: 3,
+    max_duration: 30,
     min_duration: 0,
     frame: 10,
     aggressive: 3,
@@ -120,8 +121,24 @@ function App() {
     }
   };
 
+  const resetState = () => {
+    setAudioList([]);
+    setForm({
+      link: '',
+      sample_rate: 8000,
+      max_duration: 30,
+      min_duration: 0,
+      frame: 10,
+      aggressive: 3,
+    });
+    setCurrentAudio(null);
+    setAudioCurrentIndex(0);
+  };
+
   const onSendVerifiedList = () => {
     console.log('Verified list :>> ', audioList);
+    sendAudioList(audioList)(audioListDispatch)(resetState);
+    // resetState();
   };
 
   const onChange = ({ name, value }) => {
@@ -180,8 +197,6 @@ function App() {
   };
 
   const onNextAudio = (waveform) => {
-    console.log('onNextAudio :>> ');
-
     if (isPlaying) {
       setIsPlaying(false);
       waveform.pause();
@@ -194,8 +209,6 @@ function App() {
   };
 
   const onPrevAudio = (waveform) => {
-    console.log('onPrevAudio :>> ');
-
     if (isPlaying) {
       setIsPlaying(false);
       waveform.pause();

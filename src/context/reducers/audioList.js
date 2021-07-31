@@ -2,6 +2,9 @@ import {
   GET_AUDIO_LIST_FAIL,
   GET_AUDIO_LIST_LOADING,
   GET_AUDIO_LIST_SUCCESS,
+  SEND_AUDIO_LIST_FAIL,
+  SEND_AUDIO_LIST_LOADING,
+  SEND_AUDIO_LIST_SUCCESS,
 } from '../../constants/actionTypes.js';
 
 const audioList = (state, { type, payload }) => {
@@ -28,6 +31,37 @@ const audioList = (state, { type, payload }) => {
       };
 
     case GET_AUDIO_LIST_FAIL:
+      return {
+        ...state,
+        getAudioList: {
+          ...state.getAudioList,
+          loading: false,
+          error: payload,
+        },
+      };
+
+    case SEND_AUDIO_LIST_LOADING:
+      return {
+        ...state,
+        getAudioList: {
+          ...state.getAudioList,
+          loading: true,
+          error: null,
+        },
+      };
+
+    case SEND_AUDIO_LIST_SUCCESS:
+      return {
+        ...state,
+        getAudioList: {
+          ...state.getAudioList,
+          loading: false,
+          data: payload,
+          error: null,
+        },
+      };
+
+    case SEND_AUDIO_LIST_FAIL:
       return {
         ...state,
         getAudioList: {

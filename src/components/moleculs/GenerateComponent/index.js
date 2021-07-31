@@ -85,13 +85,13 @@ const GenerateComponent = ({
               title="min duration"
               onChange={onChange}
               defaultValue={0}
-              maxValue={30}
+              maxValue={120}
             />
             <Slider
               title="max duration"
               onChange={onChange}
-              defaultValue={3}
-              maxValue={30}
+              defaultValue={30}
+              maxValue={600}
             />
             <Slider
               title="frame"
