@@ -123,14 +123,6 @@ function App() {
 
   const resetState = () => {
     setAudioList([]);
-    setForm({
-      link: '',
-      sample_rate: 8000,
-      max_duration: 30,
-      min_duration: 0,
-      frame: 10,
-      aggressive: 3,
-    });
     setCurrentAudio(null);
     setAudioCurrentIndex(0);
   };
