@@ -4,30 +4,11 @@ import { Gap } from '../../atom';
 import Box from '@material-ui/core/Box';
 
 const Sidebar = ({ form, error, onSubmit, onChange }) => {
-  const [width, setWidth] = React.useState(400);
-
-  const getWidth = () => {
-    if (window) {
-      if (window.innerWidth > 1000) {
-        return '400px';
-      }
-
-      return '360px';
-    }
-  };
-
-  React.useEffect(() => {
-    setWidth(getWidth());
-    window.addEventListener('resize', () => {
-      setWidth(getWidth());
-    });
-  }, []);
-
   return (
     <Box
       style={{
         position: 'fixed',
-        minWidth: width,
+        minWidth: 360,
         height: '100%',
       }}
     >

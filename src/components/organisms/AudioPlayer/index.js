@@ -55,7 +55,8 @@ const AudioPlayer = ({
         onStopAudio();
       });
     }
-  }, [audio, onStopAudio]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [audio]);
 
   return (
     <Box className={classes.container}>

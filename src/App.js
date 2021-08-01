@@ -128,7 +128,7 @@ function App() {
   };
 
   const onSendVerifiedList = () => {
-    console.log('Verified list :>> ', audioList);
+    // console.log('Verified list :>> ', audioList);
     sendAudioList(audioList)(audioListDispatch)(resetState);
     // resetState();
   };
@@ -170,6 +170,7 @@ function App() {
     const audioRf = audioRef.current;
 
     if (!isPlaying) {
+      console.log(waveform);
       setIsPlaying(true);
       if (waveform) {
         waveform.play();
@@ -345,7 +346,6 @@ function App() {
           <div>
             <AudioPlayer
               audio={currentAudio}
-              audioRef={audioRef}
               onPlayPause={onPlayPause}
               isPlaying={isPlaying}
               onStopAudio={onStopAudio}

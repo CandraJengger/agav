@@ -19,15 +19,31 @@ const getAudioList = (audioList) => (dispatch) => (onSuccess) => {
   axios
     .post('https://api-agav.herokuapp.com/verify/', requestPayload)
     .then((res) => {
+      const blob = new Blob([res], { type: 'application/zip' });
+      const downloadUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      document.body.appendChild(a);
+      a.click();
+
       dispatch({
         type: SEND_AUDIO_LIST_SUCCESS,
         payload: [],
       });
 
       onSuccess([]);
-      // res download
-      // onSuccess(audioDummy);
     })
+    // .then((res) => {
+    //   console.log(res);
+    //   dispatch({
+    //     type: SEND_AUDIO_LIST_SUCCESS,
+    //     payload: [],
+    //   });
+
+    //   onSuccess([]);
+    // res download
+    // onSuccess(audioDummy);
+    // })
     .catch((err) => {
       dispatch({
         type: SEND_AUDIO_LIST_FAIL,
