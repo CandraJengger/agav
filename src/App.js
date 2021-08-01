@@ -277,7 +277,6 @@ function App() {
           {loading && <Loading text="Downloading.." />}
           {error && (
             <Box
-              paddingLeft="30px"
               textAlign="center"
               display="flex"
               justifyContent="center"
