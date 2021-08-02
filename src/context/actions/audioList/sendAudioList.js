@@ -5,9 +5,28 @@ import {
   SEND_AUDIO_LIST_SUCCESS,
 } from '../../../constants/actionTypes.js';
 
+const saveAs = (blob, filename) => {
+  var a = document.createElement('a');
+  document.body.appendChild(a);
+  a.style = 'display:none';
+  var url = window.URL.createObjectURL(blob);
+  a.href = url;
+  a.download = filename;
+  a.click();
+  window.URL.revokeObjectURL(url);
+  a.remove();
+};
+
 const getAudioList = (audioList) => (dispatch) => (onSuccess) => {
   const requestPayload = {
     data: audioList,
+  };
+
+  const axiosOptions = {
+    responseType: 'arraybuffer',
+    headers: {
+      'Content-Type': 'application/json',
+    },
   };
 
   dispatch({
@@ -17,14 +36,17 @@ const getAudioList = (audioList) => (dispatch) => (onSuccess) => {
   console.log(requestPayload);
 
   axios
-    .post('https://api-agav.herokuapp.com/verify/', requestPayload)
+    .post(
+      'https://api-agav.herokuapp.com/verify/',
+      requestPayload,
+      axiosOptions
+    )
     .then((res) => {
-      const blob = new Blob([res], { type: 'application/zip' });
-      const downloadUrl = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = downloadUrl;
-      document.body.appendChild(a);
-      a.click();
+      const blob = new Blob([res.data], {
+        type: 'application/octet-stream',
+      });
+      const filename = 'agav_download.zip';
+      saveAs(blob, filename);
 
       dispatch({
         type: SEND_AUDIO_LIST_SUCCESS,
@@ -33,17 +55,6 @@ const getAudioList = (audioList) => (dispatch) => (onSuccess) => {
 
       onSuccess([]);
     })
-    // .then((res) => {
-    //   console.log(res);
-    //   dispatch({
-    //     type: SEND_AUDIO_LIST_SUCCESS,
-    //     payload: [],
-    //   });
-
-    //   onSuccess([]);
-    // res download
-    // onSuccess(audioDummy);
-    // })
     .catch((err) => {
       dispatch({
         type: SEND_AUDIO_LIST_FAIL,
